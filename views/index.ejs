@@ -9,7 +9,14 @@
 <body>
     <h1>Phonebook</h1>
 
-    <h2> Persons </h2>
+    <h2>Add Person</h2>
+    <form action="/api/addPerson" method="POST">
+      <input type="text" placeholder="name" name="name" />
+      <input type="tel" placeholder="homeNumber" name="homeNumber" />
+      <button type="submit">Add</button>
+    </form>
+
+    <h2>List of Persons</h2>
     <ul class="persons">
     <!-- Loop through persons -->
     <% for(var i = 0; i < persons.length; i++) {%>

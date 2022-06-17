@@ -79,11 +79,12 @@ app.get('/api/persons/', (req, res) => {
 //     }
 // })
 
-// app.post('/api/addPerson', (req, res) => {
-//     collection('persons').insertOne({id: req.body.id, name: req.body.name})
-//     .then(result => {
-//         console.log('New Person Added')
-//         res.redirect('/')
-//     })
-//     .catch(error => console.error(error))
-// })
+app.post('/api/addPerson', (req, res) => {
+    collection('persons').insertOne({name: req.body.name, homeNumber: req.body.homeNumber})
+    let name = req.body.name
+    .then(result => {
+        console.log(`${name} has been added to phonebook.`)
+        res.redirect('/')
+    })
+    .catch(error => console.error(error))
+})

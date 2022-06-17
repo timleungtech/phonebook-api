@@ -1,8 +1,19 @@
 const express = require('express')
 const app = express()
 const PORT = 3001
+const MongoClient = require('mongodb').MongoClient
+require('dotenv').config()
 
 app.use(express.json())
+let db,
+    DB_STRING = process.env.DB_STRING,
+    dbName = 'phonebook'
+
+MongoClient.connect(DB_STRING, { useUnifiedTopology: true })
+    .then(client => {
+        console.log(`Connected to ${dbName} Database`)
+        db = client.db(dbName)
+})
 
 let persons = [
     { 

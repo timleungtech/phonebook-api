@@ -49,11 +49,21 @@ app.listen(process.env.PORT || PORT, () => {
 })
 
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/index.html')
-    })
+  db.collection('persons').find().toArray()
+  .then(results => {
+    // console.log(results)
+    //res.render(view, locals)
+    res.render('index.ejs', {persons: results})
+  })
+  .catch(error => console.error(error))
+})
 
 app.get('/api/persons/', (req, res) => {
-    res.json(persons)
+    db.collection('persons').find().toArray()
+    .then(results => {
+      res.json(results)
+    })
+    .catch(error => console.error(error))
 })
 
 // app.get('/api/persons/:_id', (req, res) => {

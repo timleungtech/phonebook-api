@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phonebook</title>
+</head>
+<body>
+    <h1>Phonebook</h1>
+
+    <h2> Persons </h2>
+    <ul class="persons">
+    <!-- Loop through persons -->
+    <% for(var i = 0; i < persons.length; i++) {%>
+        <li class="person">
+        <!-- Output name from the iterated quote object -->
+        <span><%= persons[i].name %></span>:
+        <!-- Output quote from the iterated quote object -->
+        <span><%= persons[i].homeNumber %></span>
+        </li>
+    <% } %>
+    </ul>
+</body>
+</html>

@@ -36,6 +36,14 @@ MongoClient.connect(DB_STRING, { useUnifiedTopology: true })
             .catch(error => console.error(error))
         })
 
+        app.get('/info', (req, res) => {
+            const date = new Date()
+            db.collection('persons').find().toArray()
+            .then(results => {
+              res.send('Phonebook has info for ' + results.length + ' people' + '\n' + date)
+            })
+        })
+
         app.get('/api/persons/', (req, res) => {
             db.collection('persons').find().toArray()
             .then(results => {
@@ -59,11 +67,11 @@ MongoClient.connect(DB_STRING, { useUnifiedTopology: true })
 
         app.post('/api/addPerson', (req, res) => {
             db.collection('persons').insertOne({name: req.body.name, homeNumber: req.body.homeNumber})
-              .then(results => {
-                  let name = req.body.name
-                  console.log(`${name} has been added to phonebook.`)
-                  res.redirect('/')
-              })
-              .catch(error => console.error(error))
+            .then(results => {
+                let name = req.body.name
+                console.log(`${name} has been added to phonebook.`)
+                res.redirect('/')
+            })
+            .catch(error => console.error(error))
         })
     })

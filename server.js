@@ -33,7 +33,6 @@ MongoClient.connect(DB_STRING, { useUnifiedTopology: true })
                 console.log(date + " GET '/' requested by " + req.hostname)
                 res.render('index.ejs', {persons: results})
             })
-            .catch(error => console.error(error))
         })
 
         app.get('/info', (req, res) => {
@@ -49,20 +48,30 @@ MongoClient.connect(DB_STRING, { useUnifiedTopology: true })
             .then(results => {
                 res.json(results)
             })
-            .catch(error => console.error(error))
         })
 
         app.get('/api/persons/:_id', (req, res) => {
+            const personId = req.params._id
             db.collection('persons').find().toArray()
             .then(results => {
-                const personId = req.params._id            
                 if ( results.find(x => x['_id'] == personId) ){
                     res.json( results.find(x => x['_id'] == personId ))
                 } else {
-                    return res.status(400).send('Error 400: Bad Request')
+                    return res.status(400).send('Error 400: Bad Request').end()
                 }
             })
         })
+
+        // app.delete('/api/persons/:_id', (req, res) => {
+        //     const personId = req.params._id
+        //     db.collection('persons').deleteOne({ _id: personId })
+        //     .then(results => {
+        //         if (results.deletedCount === 0) {
+        //             return res.status(400).send('Error 400: Bad Request').end()
+        //         }
+        //         res.send(`Deleted ${personId}`)
+        //     })
+        // })
 
         app.post('/api/addPerson', (req, res) => {
             db.collection('persons').insertOne({name: req.body.name, homeNumber: req.body.homeNumber})
@@ -71,6 +80,6 @@ MongoClient.connect(DB_STRING, { useUnifiedTopology: true })
                 console.log(`${name} has been added to phonebook.`)
                 res.redirect('/')
             })
-            .catch(error => console.error(error))
         })
     })
+    .catch(error => console.error(error))

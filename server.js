@@ -43,7 +43,7 @@ MongoClient.connect(DB_STRING, { useUnifiedTopology: true })
             })
         })
 
-        app.get('/api/persons/', (req, res) => {
+        app.get('/api/persons', (req, res) => {
             db.collection('persons').find().toArray()
             .then(results => {
                 res.json(results)
@@ -69,11 +69,23 @@ MongoClient.connect(DB_STRING, { useUnifiedTopology: true })
         //         if (results.deletedCount === 0) {
         //             return res.status(400).send('Error 400: Bad Request').end()
         //         }
-        //         res.send(`Deleted ${personId}`)
+        //         // return res.json(`Deleted ${personId}`)
+        //         return res.json('Deleted document')
         //     })
         // })
 
-        app.post('/api/addPerson', (req, res) => {
+        app.delete('/api/persons', (req, res) => {
+            db.collection('persons').deleteOne({ _id: '62affcf01cf6657bca5c74c3' })
+            .then(results => {
+                if (results.deletedCount === 0) {
+                    return res.status(400).send('Error 400: Bad Request').end()
+                }
+                // return res.json(`Deleted ${personId}`)
+                return res.json('Deleted document')
+            })
+        })
+
+        app.post('/api/persons', (req, res) => {
             db.collection('persons').insertOne({name: req.body.name, homeNumber: req.body.homeNumber})
             .then(results => {
                 let name = req.body.name

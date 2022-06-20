@@ -10,7 +10,7 @@
     <h1>Phonebook</h1>
 
     <h2>Add Person</h2>
-    <form action="/api/addPerson" method="POST">
+    <form action="/api/persons" method="POST">
       <input type="text" placeholder="name" name="name" />
       <input type="tel" placeholder="homeNumber" name="homeNumber" />
       <button type="submit">Add</button>
@@ -28,5 +28,25 @@
         </li>
     <% } %>
     </ul>
+
+    <!-- <div>
+        <h2>Update Test Document</h2>
+        <p></p>
+        <form action="/api/persons" method="PUT">
+          <input type="text" placeholder="name" name="name" />
+          <input type="tel" placeholder="homeNumber" name="homeNumber" />
+          <button type="submit">Add</button>
+        </form>
+        <button id="update-button">Update Test Document</button>
+    </div> -->
+    
+    <div>
+        <h2>Delete Test Document</h2>
+        <p></p>
+        <button id="delete-button">Delete Test Document</button>
+    </div>
+    <div id="message"></div>
+
+    <script src="/main.js"></script>
 </body>
 </html>

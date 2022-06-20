@@ -29,9 +29,9 @@ MongoClient.connect(DB_STRING, { useUnifiedTopology: true })
         app.get('/', (req, res) => {
             db.collection('persons').find().toArray()
             .then(results => {
-              let date = new Date()
-              console.log(date + " GET '/' requested by " + req.hostname)
-              res.render('index.ejs', {persons: results})
+                let date = new Date()
+                console.log(date + " GET '/' requested by " + req.hostname)
+                res.render('index.ejs', {persons: results})
             })
             .catch(error => console.error(error))
         })
@@ -40,14 +40,14 @@ MongoClient.connect(DB_STRING, { useUnifiedTopology: true })
             const date = new Date()
             db.collection('persons').find().toArray()
             .then(results => {
-              res.send('Phonebook has info for ' + results.length + ' people' + '\n' + date)
+                res.send('Phonebook has info for ' + results.length + ' people' + '\n' + date)
             })
         })
 
         app.get('/api/persons/', (req, res) => {
             db.collection('persons').find().toArray()
             .then(results => {
-              res.json(results)
+                res.json(results)
             })
             .catch(error => console.error(error))
         })
@@ -55,13 +55,13 @@ MongoClient.connect(DB_STRING, { useUnifiedTopology: true })
         app.get('/api/persons/:_id', (req, res) => {
             db.collection('persons').find().toArray()
             .then(results => {
-            const personId = req.params._id            
-            if ( results.find(x => x['_id'] == personId) ){
-                res.json( results.find(x => x['_id'] == personId ))
-            } else {
-                return res.status(400).send('Error 400: Bad Request')
-            }
-          })
+                const personId = req.params._id            
+                if ( results.find(x => x['_id'] == personId) ){
+                    res.json( results.find(x => x['_id'] == personId ))
+                } else {
+                    return res.status(400).send('Error 400: Bad Request')
+                }
+            })
         })
 
         app.post('/api/addPerson', (req, res) => {

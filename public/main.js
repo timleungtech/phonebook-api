@@ -1,5 +1,6 @@
 // const update = document.querySelector('#update-button')
 const deleteButton = document.querySelector('#delete-button')
+const deleteName = document.querySelector('#delete-name')
 const messageDiv = document.querySelector('#message')
 
 // update.addEventListener('click', _ => {
@@ -21,20 +22,21 @@ const messageDiv = document.querySelector('#message')
 // })
 
 deleteButton.addEventListener('click', _ => {
-    fetch('/api/persons/:_id', {
+    fetch('/', {
         method: 'delete',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-        _id: '62affcf01cf6657bca5c74c3'
+            name: deleteName.value
         })
     })
     .then(res => {
-      if (res.ok) return res.json()
+        if (res.ok) return res.json()
     })
-    .then(res => {
-        if (res === 'Deleted document') {
-            messageDiv.textContent = 'Deleted document'
+    .then(response => {
+        if (response === 'Name not found') {
+            messageDiv.textContent = `${deleteName.value} not found`
         } else {
+            messageDiv.textContent = `${deleteName.value} has been deleted`
             window.location.reload(true)
         }
     })

@@ -62,26 +62,16 @@ MongoClient.connect(DB_STRING, { useUnifiedTopology: true })
             })
         })
 
-        // app.delete('/api/persons/:_id', (req, res) => {
-        //     const personId = req.params._id
-        //     db.collection('persons').deleteOne({ _id: personId })
-        //     .then(results => {
-        //         if (results.deletedCount === 0) {
-        //             return res.status(400).send('Error 400: Bad Request').end()
-        //         }
-        //         // return res.json(`Deleted ${personId}`)
-        //         return res.json('Deleted document')
-        //     })
-        // })
-
-        app.delete('/api/persons', (req, res) => {
-            db.collection('persons').deleteOne({ _id: '62affcf01cf6657bca5c74c3' })
+        app.delete('/', (req, res) => {
+            const personName = req.body.name
+            db.collection('persons').deleteOne({ name: personName })
             .then(results => {
                 if (results.deletedCount === 0) {
-                    return res.status(400).send('Error 400: Bad Request').end()
+                    return res.send('Name not found')
+                } else{ 
+                  res.json(`${personName} has been deleted from phonebook.`)
+                  console.log(`${personName} has been deleted from phonebook.`)
                 }
-                // return res.json(`Deleted ${personId}`)
-                return res.json('Deleted document')
             })
         })
 

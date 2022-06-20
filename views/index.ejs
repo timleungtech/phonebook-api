@@ -39,11 +39,14 @@
         </form>
         <button id="update-button">Update Test Document</button>
     </div> -->
-    
+
     <div>
-        <h2>Delete Test Document</h2>
+        <h2>Delete Entry</h2>
         <p></p>
-        <button id="delete-button">Delete Test Document</button>
+        <form action="/" method="DELETE">
+            <input id='delete-name' type="text" placeholder="name" name="name" />
+            <button id="delete-button" type='submit'>Delete</button>
+        </form>
     </div>
     <div id="message"></div>
 

@@ -52,18 +52,17 @@ MongoClient.connect(DB_STRING, { useUnifiedTopology: true })
             .catch(error => console.error(error))
         })
 
-        // app.get('/api/persons/:_id', (req, res) => {
-        //     const personId = req.params._id
-        //     if ( persons[personId] ){
-        //         res.json(persons[personId])
-        //     } else {
-        //         return res.status(400).json({ 
-        //                 "_id": 'unknown',
-        //                 "name": "unknown", 
-        //                 "number": "000-000-0000"
-        //         })
-        //     }
-        // })
+        app.get('/api/persons/:_id', (req, res) => {
+            db.collection('persons').find().toArray()
+            .then(results => {
+            const personId = req.params._id            
+            if ( results.find(x => x['_id'] == personId) ){
+                res.json( results.find(x => x['_id'] == personId ))
+            } else {
+                return res.status(400).send('Error 400: Bad Request')
+            }
+          })
+        })
 
         app.post('/api/addPerson', (req, res) => {
             db.collection('persons').insertOne({name: req.body.name, homeNumber: req.body.homeNumber})

@@ -67,10 +67,12 @@ MongoClient.connect(DB_STRING, { useUnifiedTopology: true })
             db.collection('persons').deleteOne({ name: personName })
             .then(results => {
                 if (results.deletedCount === 0) {
-                    return res.send('Name not found')
-                } else{ 
-                  res.json(`${personName} has been deleted from phonebook.`)
+                  // console.log(results)
+                    return res.status(400).json('Error 400: Bad Request')
+                } else {
+                  // console.log(results)
                   console.log(`${personName} has been deleted from phonebook.`)
+                  res.status(200).json(`${personName} has been deleted from phonebook.`)
                 }
             })
         })

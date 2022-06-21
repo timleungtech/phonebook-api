@@ -30,13 +30,10 @@ deleteButton.addEventListener('click', _ => {
         })
     })
     .then(res => {
-        if (res.ok) return res.json()
-    })
-    .then(response => {
-        if (response === 'Name not found') {
-            messageDiv.textContent = `${deleteName.value} not found`
+        // console.log(res)
+        if (!res.ok) {
+            messageDiv.textContent = 'Name not found'
         } else {
-            messageDiv.textContent = `${deleteName.value} has been deleted`
             window.location.reload(true)
         }
     })

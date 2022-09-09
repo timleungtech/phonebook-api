@@ -1,5 +1,5 @@
 ## Summary:
-A Phonwbook CRUD app made with Node, Express, and MongoDB. 
+A Phonebook CRUD app made with Node, Express, and MongoDB. 
 
 ## Lessons learned: 
 * Used Express CRUD methods

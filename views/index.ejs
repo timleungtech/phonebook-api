@@ -4,30 +4,35 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
     <title>Phonebook</title>
 </head>
 <body>
     <h1>Phonebook</h1>
+    <div class="card w-96 bg-base-100 shadow-xl">
+        <figure><img src="https://placeimg.com/400/225/arch" alt="Shoes" /></figure>
+        <div class="card-body">
+            <h2>List of Persons</h2>
+            <ul class="persons">
+            <!-- Loop through persons -->
+            <% for(var i = 0; i < persons.length; i++) {%>
+                <li class="person">
+                <!-- Output name from the iterated quote object -->
+                <span><%= persons[i].name %></span>:
+                <!-- Output quote from the iterated quote object -->
+                <span><%= persons[i].homeNumber %></span>
+                </li>
+            <% } %>
+            </ul>
+        </div>
+      </div>
 
     <h2>Add Person</h2>
     <form action="/api/persons" method="POST">
       <input type="text" placeholder="name" name="name" />
       <input type="tel" placeholder="homeNumber" name="homeNumber" />
-      <button type="submit">Add</button>
+      <button class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded" type="submit">Add</button>
     </form>
-
-    <h2>List of Persons</h2>
-    <ul class="persons">
-    <!-- Loop through persons -->
-    <% for(var i = 0; i < persons.length; i++) {%>
-        <li class="person">
-        <!-- Output name from the iterated quote object -->
-        <span><%= persons[i].name %></span>:
-        <!-- Output quote from the iterated quote object -->
-        <span><%= persons[i].homeNumber %></span>
-        </li>
-    <% } %>
-    </ul>
 
     <!-- <div>
         <h2>Update Test Document</h2>
@@ -45,7 +50,7 @@
         <p></p>
         <!-- <form action="/" method="DELETE"> -->
             <input id='delete-name' type="text" placeholder="name" name="name" />
-            <button id="delete-button">Delete</button>
+            <button id="delete-button" class="bg-red-500 hover:bg-red-400 text-white font-bold py-2 px-4 border-b-4 border-red-700 hover:border-red-500 rounded">Delete</button>
         <!-- </form> -->
     </div>
     <div id="message"></div>
